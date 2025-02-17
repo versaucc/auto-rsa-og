@@ -4,6 +4,7 @@
 # 2024/09/19
 # Adapted from Nelson Dane's Selenium based code and created with the help of playwright codegen
 
+import logger as l 
 import asyncio
 import os
 import traceback
@@ -248,6 +249,7 @@ def fidelity_transaction(
                     f"{name} account {print_account}: {orderObj.get_action()} {orderObj.get_amount()} shares of {stock}",
                     loop,
                 )
+                # l.append_to_csv()     
 
     # Close browser
     fidelity_browser.close_browser()
