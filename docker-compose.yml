@@ -1,7 +1,7 @@
 services:
     auto-rsa:
-        container_name: auto-rsa-og
-        image: docker.io/versauce/auto-rsa-og:latest # or change to other branch you want to use
+        container_name: auto-rsa
+        image: docker.io/nelsondane/auto-rsa:latest # or change to other branch you want to use
         build: . # uncomment this line if you want to build the image locally with "docker compose up -d --build"
         restart: unless-stopped
         env_file:
