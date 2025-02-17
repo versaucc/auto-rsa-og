@@ -4,7 +4,7 @@
 # 2024/09/19
 # Adapted from Nelson Dane's Selenium based code and created with the help of playwright codegen
 
-import logger as l 
+# import logger as l 
 import asyncio
 import os
 import traceback
