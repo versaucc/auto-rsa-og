@@ -4,10 +4,11 @@
 # 2024/09/19
 # Adapted from Nelson Dane's Selenium based code and created with the help of playwright codegen
 
-# import logger as l 
+
 import asyncio
 import os
 import traceback
+import log_trade as l 
 
 from dotenv import load_dotenv
 from fidelity import fidelity
@@ -210,6 +211,7 @@ def fidelity_transaction(
         printAndDiscord(
             f"{name}: {orderObj.get_action()}ing {orderObj.get_amount()} of {stock}",
             loop,
+            print('yes, buying this')
         )
         # Reload the page incase we were trading before
         fidelity_browser.page.reload()
@@ -236,6 +238,7 @@ def fidelity_transaction(
                 printAndDiscord(
                     f"{name} account {print_account}: Error: {error_message}",
                     loop,
+                    print('yes there is an error here')
                 )
             # Print test run confirmation if test run
             elif success and orderObj.get_dry():
@@ -243,13 +246,27 @@ def fidelity_transaction(
                     f"DRY: {name} account {print_account}: {orderObj.get_action()} {orderObj.get_amount()} shares of {stock}",
                     loop,
                 )
+            # Add logging features 
             # Print real run confirmation if real run
             elif success and not orderObj.get_dry():
                 printAndDiscord(
                     f"{name} account {print_account}: {orderObj.get_action()} {orderObj.get_amount()} shares of {stock}",
                     loop,
                 )
-                # l.append_to_csv()     
+
+                #Append each trade 
+                print('fart')
+                fidelity_o.set_holdings(
+                    parent_name=name,
+                    account_name=account_number,
+                    stock=["ticker"],
+                    quantity=["quantity"],
+                    price=["last_price"],
+                )
+                     # Append the ticker to the appropriate account
+                
+                print(fidelity_o.price())
+                l.append_to_csv(orderObj.get_action(), stock, fidelity_o.price())     
 
     # Close browser
     fidelity_browser.close_browser()
