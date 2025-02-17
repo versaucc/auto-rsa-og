@@ -1,0 +1,3 @@
+Change Log: 
+	Environment: Conda python 3.12 
+	fidelityAPI.py: data logging 
